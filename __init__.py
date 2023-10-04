@@ -115,8 +115,6 @@ class QuizGameSkill(MycroftSkill):
     @intent_handler("StartQuiz.intent")
     def start_quiz(self, message):
         self.play_game()
-    
-    import time
 
 def play_game(self):
     total_rounds = 4 

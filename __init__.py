@@ -116,76 +116,75 @@ class QuizGameSkill(MycroftSkill):
     def start_quiz(self, message):
         self.play_game()
 
-def play_game(self):
-    total_rounds = 4 
+    def play_game(self):
+		total_rounds = 4 
 
-    for round_num in range(0, total_rounds + 1):
-        self.gui.show_text(f"Round {round_num}:")
-        self.gui.show_text("Ronja en de piraten", override_idle=True)
+		for round_num in range(0, total_rounds + 1):
+			self.gui.show_text(f"Round {round_num}:")
+			self.gui.show_text("Ronja en de piraten", override_idle=True)
 
-        questions, correct_answers, question_audio_files, correct_answer_audio, false_answer_audio, intro, outro, main_question, duration_intro = generate_round_questions(round_num)
+			questions, correct_answers, question_audio_files, correct_answer_audio, false_answer_audio, intro, outro, main_question, duration_intro = generate_round_questions(round_num)
 
-        # Track if intro is already played for the current round
-        intro_played = False
+			# Track if intro is already played for the current round
+			intro_played = False
 
-        for question, correct_answer, question_audio_file in zip(questions, correct_answers, question_audio_files):
+			for question, correct_answer, question_audio_file in zip(questions, correct_answers, question_audio_files):
 
-            if not intro_played:
-                # Play the question audio using Mycroft's play_audio_file
-                play_audio_file(intro)
-                time.sleep(duration_intro)
+				if not intro_played:
+					# Play the question audio using Mycroft's play_audio_file
+					play_audio_file(intro)
+					time.sleep(duration_intro)
 
-                # Set intro_played to True after playing the intro
-                intro_played = True
+					# Set intro_played to True after playing the intro
+					intro_played = True
 
-            # Play the question audio using Mycroft's play_audio_file
-            play_audio_file(main_question)
-            time.sleep(4)
+				# Play the question audio using Mycroft's play_audio_file
+				play_audio_file(main_question)
+				time.sleep(4)
 
-            # Play the question audio using Mycroft's play_audio_file
-            self.gui.show_text(question, override_idle=True)
-            play_audio_file(question_audio_file)
-            time.sleep(6)
+				# Play the question audio using Mycroft's play_audio_file
+				self.gui.show_text(question, override_idle=True)
+				play_audio_file(question_audio_file)
+				time.sleep(6)
 
-            reply = None
-            while reply not in ['ja', 'nee']:
-                response = self.get_response()
+				reply = None
+				while reply not in ['ja', 'nee']:
+					response = self.get_response()
 
-                if response:
-                    reply = response.lower()
-                else:
-                    self.speak("Kies maar, ja of nee.")
+					if response:
+						reply = response.lower()
+					else:
+						self.speak("Kies maar, ja of nee.")
 
-            if reply == 'ja' and correct_answer:
-                # Play the correct answer audio using Mycroft's play_audio_file
-                play_audio_file(correct_answer_audio)
-                self.gui.show_text('Top', override_idle=True)
-                if outro: 
-                    play_audio_file(outro)
-                    time.sleep(5)
-                    break
-                else:
-                    time.sleep(5)
-                    break
-            elif (reply == 'ja' and not correct_answer) or (reply == 'nee' and correct_answer):
-                # Play the false answer audio using Mycroft's play_audio_file
-                play_audio_file(false_answer_audio)
-                if outro: 
-                    play_audio_file(outro)
-                    time.sleep(5)
-                    break
-                else:
-                    time.sleep(5)
-                    break
+				if reply == 'ja' and correct_answer:
+					# Play the correct answer audio using Mycroft's play_audio_file
+					play_audio_file(correct_answer_audio)
+					self.gui.show_text('Top', override_idle=True)
+					if outro: 
+						play_audio_file(outro)
+						time.sleep(5)
+						break
+					else:
+						time.sleep(5)
+						break
+				elif (reply == 'ja' and not correct_answer) or (reply == 'nee' and correct_answer):
+					# Play the false answer audio using Mycroft's play_audio_file
+					play_audio_file(false_answer_audio)
+					if outro: 
+						play_audio_file(outro)
+						time.sleep(5)
+						break
+					else:
+						time.sleep(5)
+						break
 
-            elif round_num == total_rounds:
-                return
+				elif round_num == total_rounds:
+					return
 
     def stop(self):
-        pass
+			pass
 
 def create_skill():
     return QuizGameSkill()
-
 
 

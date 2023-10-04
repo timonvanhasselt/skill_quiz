@@ -119,9 +119,6 @@ class QuizGameSkill(MycroftSkill):
     def play_game(self):
         total_rounds = 4 
     
-    def play_game(self):
-        total_rounds = 4 
-
     for round_num in range(0, total_rounds + 1):
         self.gui.show_text(f"Round {round_num}:")
         self.gui.show_text("Ronja en de piraten", override_idle=True)

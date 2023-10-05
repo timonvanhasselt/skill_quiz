@@ -14,14 +14,17 @@ def generate_round_questions(round_num):
         correct_answers = [False, True]
 
         # Set audio files for round 0
-        intro = "./skill_quiz/scene0/q0intro.mp3"
-        outro = "./skill_quiz/scene0/tutorialoutro.mp3"
+        intro = "./skill_quiz/scene0/tijdelijk.mp3"
+        outro = "./skill_quiz/scene0/tijdelijk.mp3"
         main_question = "./skill_quiz/scene0/tutorialq.mp3"
         question_audio_files = ["./skill_quiz/scene0/tutorialqa1.mp3", "./skill_quiz/scene0/tutorialqa2.mp3"]
         correct_answer_audio = "./skill_quiz/scene0/tutorialqcorrect.mp3"
         false_answer_audio = "./skill_quiz/scene0/tutorialqincorrect.mp3"
-        duration_intro = 33
-
+        duration_intro = 2 #34
+        duration_outro = 2 #6
+        duration_main = 3
+        duration_correct = 7
+        duration_false = 6
 
     elif round_num == 1:
         questions = [
@@ -34,13 +37,18 @@ def generate_round_questions(round_num):
         correct_answers = [False, False, False, True]
 
         # Set audio files for round 1
-        intro = "./skill_quiz/scene1/q1intro.mp3"
-        outro = "./skill_quiz/scene1/q1outro.mp3"
+        intro = "./skill_quiz/scene1/tijdelijk.mp3"
+        outro = "./skill_quiz/scene1/tijdelijk.mp3"
         main_question = "./skill_quiz/scene1/q1.mp3"
         question_audio_files = ["./skill_quiz/scene1/q1a1.mp3", "./skill_quiz/scene1/q1a2.mp3", "./skill_quiz/scene1/q1a3.mp3", "./skill_quiz/scene1/q1a4.mp3"]
         correct_answer_audio = "./skill_quiz/scene1/q1correct.mp3"
         false_answer_audio = "./skill_quiz/scene1/q1incorrect.mp3"
-        duration_intro = 51
+        duration_intro = 2 #52
+        duration_outro = 2 #79
+        duration_main = 2
+        duration_correct = 4
+        duration_false = 5
+
 
     elif round_num == 2:
         questions = [
@@ -53,13 +61,17 @@ def generate_round_questions(round_num):
         correct_answers = [False, False, False, True]
 
         # Set audio files for round 2
-        intro = "./skill_quiz/scene2/q2intro.mp3"
-        outro = "./skill_quiz/scene2/q2outro.mp3"
+        intro = "./skill_quiz/scene2/tijdelijk.mp3"
+        outro = None
         main_question = "./skill_quiz/scene2/q2.mp3"
         question_audio_files = ["./skill_quiz/scene2/q2a1.mp3", "./skill_quiz/scene2/q2a2.mp3", "./skill_quiz/scene2/q2a3.mp3", "./skill_quiz/scene2/q2a4.mp3"]
         correct_answer_audio = "./skill_quiz/scene2/q2correct.mp3"
         false_answer_audio = "./skill_quiz/scene2/q2incorrect.mp3"
-        duration_intro = 31
+        duration_intro = 2 #32
+        duration_outro = 0
+        duration_main = 7
+        duration_correct = 10
+        duration_false = 11
 
     elif round_num == 3:
         questions = [
@@ -72,33 +84,113 @@ def generate_round_questions(round_num):
         correct_answers = [False, False, False, True]
 
         # Set audio files for round 3
-        intro = "./skill_quiz/scene3/q3intro.mp3"
-        outro = "./skill_quiz/scene3/q3outro.mp3"
+        intro = "./skill_quiz/scene3/tijdelijk.mp3"
+        outro = None
         main_question = "./skill_quiz/scene3/q3.mp3"
         question_audio_files = ["./skill_quiz/scene3/q3a1.mp3", "./skill_quiz/scene3/q3a2.mp3", "./skill_quiz/scene3/q3a3.mp3", "./skill_quiz/scene3/q3a4.mp3"]
         correct_answer_audio = "./skill_quiz/scene3/q3correct.mp3"
         false_answer_audio = "./skill_quiz/scene3/q3incorrect.mp3"
-        duration_intro = 23
+        duration_intro = 2 #23
+        duration_outro = 0
+        duration_main = 4
+        duration_correct = 7
+        duration_false = 9
 
 
     elif round_num == 4:
         questions = [
-            "vraag 4.1",
-            "vraag 4.2",
-            "vraag 4.3",
-            "vraag 4.4"
+            "Waar er gekookt wordt?",
+            "Waar de tafel gedekt wordt?",
+            "Aan de onderkant van het schip?",
+            "Voorin het schip?"
         ]
 
         correct_answers = [False, False, False, True]
 
         # Set audio files for round 4
-        intro = "./skill_quiz/scene3/q4intro.mp3"
-        outro = "./skill_quiz/scene3/q4outro.mp3"
+        intro = "./skill_quiz/scene3/tijdelijk.mp3"
+        outro = None
         main_question = "./skill_quiz/scene3/q4.mp3"
         question_audio_files = ["./skill_quiz/scene3/q4a1.mp3", "./skill_quiz/scene3/q4a2.mp3", "./skill_quiz/scene3/q4a3.mp3", "./skill_quiz/scene3/q4a4.mp3"]
         correct_answer_audio = "./skill_quiz/scene3/q4correct.mp3"
         false_answer_audio = "./skill_quiz/scene3/q4incorrect.mp3"
-        duration_intro = 18
+        duration_intro = 2 #18
+        duration_outro = 0
+        duration_main = 5
+        duration_correct = 6
+        duration_false = 7
+
+    elif round_num == 5:
+        questions = [
+            "Lekker bij de haard",
+            "Rijg je aan m'n zwaard",
+            "Trek de kapiteint aan z'n baard",
+            "Stelen lijkt me niet de moeite waard"
+        ]
+
+        correct_answers = [False, False, False, True]
+
+        # Set audio files for round 5
+        intro = "./skill_quiz/scene4/tijdelijk.mp3"
+        outro = "./skill_quiz/scene4/tijdelijk.mp3"
+        main_question = "./skill_quiz/scene4/q5.mp3"
+        question_audio_files = ["./skill_quiz/scene4/q5a1.mp3", "./skill_quiz/scene4/q5a2.mp3", "./skill_quiz/scene4/q5a3.mp3", "./skill_quiz/scene4/q5a4.mp3"]
+        correct_answer_audio = "./skill_quiz/scene4/q5correct.mp3"
+        false_answer_audio = "./skill_quiz/scene4/q5incorrect.mp3"
+        duration_intro = 2 #66
+        duration_outro = 2 #46
+        duration_main = 4
+        duration_correct = 10
+        duration_false = 10
+
+
+    elif round_num == 6:
+        questions = [
+            "Speedboot?",
+            "Kapitein op een luchtbed?",
+            "Een roze dolfijn?",
+            "Een zeemeermin?"
+        ]
+
+        correct_answers = [False, False, False, True]
+
+        # Set audio files for round 6
+        intro = "./skill_quiz/scene5/tijdelijk.mp3"
+        outro = "./skill_quiz/scene5/tijdelijk.mp3"
+        main_question = "./skill_quiz/scene5/q6.mp3"
+        question_audio_files = ["./skill_quiz/scene5/q6a1.mp3", "./skill_quiz/scene5/q6a2.mp3", "./skill_quiz/scene5/q6a3.mp3", "./skill_quiz/scene5/q6a4.mp3"]
+        correct_answer_audio = "./skill_quiz/scene5/q6correct.mp3"
+        false_answer_audio = "./skill_quiz/scene5/q6incorrect.mp3"
+        duration_intro = 2 #35
+        duration_outro = 2 #14
+        duration_main = 4
+        duration_correct = 3
+        duration_false = 4
+
+
+    elif round_num == 7:
+        questions = [
+            "Aan het einde van de duikplank?",
+            "Achterin bij het roer?",
+            "Vooraan het schip?",
+            "Helemaal bovenin?"
+        ]
+
+        correct_answers = [False, False, False, True]
+
+        # Set audio files for round 7
+        intro = "./skill_quiz/scene5/tijdelijk.mp3"
+        outro = "./skill_quiz/scene5/tijdelijk.mp3"
+        main_question = "./skill_quiz/scene5/q7.mp3"
+        question_audio_files = ["./skill_quiz/scene5/q7a1.mp3", "./skill_quiz/scene5/q7a2.mp3", "./skill_quiz/scene5/q7a3.mp3", "./skill_quiz/scene5/q7a4.mp3"]
+        correct_answer_audio = "./skill_quiz/scene5/q7correct.mp3"
+        false_answer_audio = "./skill_quiz/scene5/q7incorrect.mp3"
+        duration_intro = 2 #54
+        duration_outro = 2 #8
+        duration_main = 6
+        duration_correct = 8
+        duration_false = 9
+
 
 
     # Shuffle the questions, their corresponding correct answers, and audio files together
@@ -106,7 +198,8 @@ def generate_round_questions(round_num):
     random.shuffle(combined)
     questions, correct_answers, question_audio_files = zip(*combined)
 
-    return questions, correct_answers, question_audio_files, correct_answer_audio, false_answer_audio, intro, outro, main_question, duration_intro
+    return questions, correct_answers, question_audio_files, correct_answer_audio, false_answer_audio, intro, outro, main_question, duration_intro, duration_outro, duration_main, duration_correct, duration_false
+
 
 class QuizGameSkill(MycroftSkill):
     def __init__(self):
@@ -117,23 +210,30 @@ class QuizGameSkill(MycroftSkill):
         self.play_game()
 
     def play_game(self):
-        total_rounds = 4
+        total_rounds = 6
 
         for round_num in range(0, total_rounds + 1):
             self.gui.show_text(f"Round {round_num}:")
             self.gui.show_text("Ronja en de piraten", override_idle=True)
 
-            questions, correct_answers, question_audio_files, correct_answer_audio, false_answer_audio, intro, outro, main_question, duration_intro = generate_round_questions(round_num)
+            questions, correct_answers, question_audio_files, correct_answer_audio, false_answer_audio, intro, outro, main_question, duration_intro, duration_outro, duration_main,  duration_correct, duration_false = generate_round_questions(round_num)
+
+            # Track if intro is already played for the current round
+            intro_played = False
 
             for question, correct_answer, question_audio_file in zip(questions, correct_answers, question_audio_files):
 
-                # Play the question audio using Mycroft's play_audio_file
-                play_audio_file(intro)
-                time.sleep(duration_intro)
+                if not intro_played:
+                    # Play the question audio using Mycroft's play_audio_file
+                    play_audio_file(intro)
+                    time.sleep(duration_intro)
 
-                # Play the question audio using Mycroft's play_audio_file
-                play_audio_file(main_question)
-                time.sleep(4)
+                    # Set intro_played to True after playing the intro
+                    intro_played = True
+
+                    # Play the question audio using Mycroft's play_audio_file
+                    play_audio_file(main_question)
+                    time.sleep(duration_main)
 
                 # Play the question audio using Mycroft's play_audio_file
                 self.gui.show_text(question, override_idle=True)
@@ -149,38 +249,39 @@ class QuizGameSkill(MycroftSkill):
                     else:
                         self.speak("Kies maar, ja of nee.")
 
-
                 if reply == 'ja' and correct_answer:
                     # Play the correct answer audio using Mycroft's play_audio_file
                     play_audio_file(correct_answer_audio)
-                    self.gui.show_text('Top', override_idle=True)
+                    time.sleep(duration_correct)
+                    self.gui.show_text('Goed!', override_idle=True)
                     if outro:
                         play_audio_file(outro)
-                        time.sleep(5)
+                        self.gui.show_text('Ronja', override_idle=True)
+                        time.sleep(duration_outro)
                         break
                     else:
-                        time.sleep(5)
+                      #  time.sleep(5)
                         break
                 elif (reply == 'ja' and not correct_answer) or (reply == 'nee' and correct_answer):
                     # Play the false answer audio using Mycroft's play_audio_file
                     play_audio_file(false_answer_audio)
+                    self.gui.show_text('Ronja', override_idle=True)
+                    time.sleep(duration_false)
                     if outro:
                         play_audio_file(outro)
-                        time.sleep(5)
+                        time.sleep(duration_outro)
                         break
                     else:
-                        time.sleep(5)
+                       # time.sleep(5)
                         break
 
                 elif round_num == total_rounds:
-                    #self.speak('Congratulations! You completed all rounds.')
+                    self.gui.show_text('Einde', override_idle=True)
                     return
+                    self.stop()
 
     def stop(self):
         pass
 
 def create_skill():
     return QuizGameSkill()
-
-
-

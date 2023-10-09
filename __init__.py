@@ -209,8 +209,9 @@ def generate_round_questions(round_num):
 
 
 class QuizGameSkill(OVOSSkill):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super(QuizGameSkill, self).__init__(*args, **kwargs)
+        self.skill_id = "skill_quiz"
 
     def initialize(self):
         self.audio = PlaybackService(self.bus)

@@ -1,7 +1,7 @@
 import random
-from adapt.intent import IntentBuilder
-from mycroft import MycroftSkill, intent_handler
-from mycroft.util.audio_utils import play_audio_file
+from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.decorators import intent_handler
+from ovos_audio.service import PlaybackService
 import time
 
 def generate_round_questions(round_num):
@@ -25,7 +25,8 @@ def generate_round_questions(round_num):
         duration_main = 3
         duration_correct = 7
         duration_false = 6
-
+        duration_answers = 4
+        
     elif round_num == 1:
         questions = [
             "Is dit een scheetkussen",
@@ -48,7 +49,7 @@ def generate_round_questions(round_num):
         duration_main = 2
         duration_correct = 4
         duration_false = 5
-
+        duration_answers = 5
 
     elif round_num == 2:
         questions = [
@@ -72,6 +73,7 @@ def generate_round_questions(round_num):
         duration_main = 7
         duration_correct = 10
         duration_false = 11
+        duration_answers = 6
 
     elif round_num == 3:
         questions = [
@@ -95,6 +97,7 @@ def generate_round_questions(round_num):
         duration_main = 4
         duration_correct = 7
         duration_false = 9
+        duration_answers = 6
 
 
     elif round_num == 4:
@@ -119,12 +122,13 @@ def generate_round_questions(round_num):
         duration_main = 5
         duration_correct = 6
         duration_false = 7
+        duration_answers = 6
 
     elif round_num == 5:
         questions = [
             "Lekker bij de haard",
             "Rijg je aan m'n zwaard",
-            "Trek de kapiteint aan z'n baard",
+            "Trek de kapitein aan z'n baard",
             "Stelen lijkt me niet de moeite waard"
         ]
 
@@ -142,6 +146,7 @@ def generate_round_questions(round_num):
         duration_main = 4
         duration_correct = 10
         duration_false = 10
+        duration_answers = 7
 
 
     elif round_num == 6:
@@ -166,6 +171,7 @@ def generate_round_questions(round_num):
         duration_main = 4
         duration_correct = 3
         duration_false = 4
+        duration_answers = 3
 
 
     elif round_num == 7:
@@ -190,6 +196,7 @@ def generate_round_questions(round_num):
         duration_main = 6
         duration_correct = 8
         duration_false = 9
+        duration_answers = 7
 
 
 
@@ -198,12 +205,15 @@ def generate_round_questions(round_num):
     random.shuffle(combined)
     questions, correct_answers, question_audio_files = zip(*combined)
 
-    return questions, correct_answers, question_audio_files, correct_answer_audio, false_answer_audio, intro, outro, main_question, duration_intro, duration_outro, duration_main, duration_correct, duration_false
+    return questions, correct_answers, question_audio_files, correct_answer_audio, false_answer_audio, intro, outro, main_question, duration_intro, duration_outro, duration_main, duration_correct, duration_false, duration_answers
 
 
-class QuizGameSkill(MycroftSkill):
+class QuizGameSkill(OVOSSkill):
     def __init__(self):
         super().__init__()
+
+    def initialize(self):
+        self.audio = PlaybackService(self.bus)
 
     @intent_handler("StartQuiz.intent")
     def start_quiz(self, message):
@@ -216,7 +226,7 @@ class QuizGameSkill(MycroftSkill):
             self.gui.show_text(f"Round {round_num}:")
             self.gui.show_text("Ronja en de piraten", override_idle=True)
 
-            questions, correct_answers, question_audio_files, correct_answer_audio, false_answer_audio, intro, outro, main_question, duration_intro, duration_outro, duration_main,  duration_correct, duration_false = generate_round_questions(round_num)
+            questions, correct_answers, question_audio_files, correct_answer_audio, false_answer_audio, intro, outro, main_question, duration_intro, duration_outro, duration_main,  duration_correct, duration_false, duration_answers = generate_round_questions(round_num)
 
             # Track if intro is already played for the current round
             intro_played = False
@@ -224,21 +234,23 @@ class QuizGameSkill(MycroftSkill):
             for question, correct_answer, question_audio_file in zip(questions, correct_answers, question_audio_files):
 
                 if not intro_played:
-                    # Play the question audio using Mycroft's play_audio_file
-                    play_audio_file(intro)
+                    # Play the question audio
+                    self.play_audio(intro)
                     time.sleep(duration_intro)
 
                     # Set intro_played to True after playing the intro
                     intro_played = True
 
-                    # Play the question audio using Mycroft's play_audio_file
-                    play_audio_file(main_question)
+                    # Play the main question audio 
+                    self.play_audio(main_question)
                     time.sleep(duration_main)
 
-                # Play the question audio using Mycroft's play_audio_file
+                # Play the question/answer audio
                 self.gui.show_text(question, override_idle=True)
-                play_audio_file(question_audio_file)
-                time.sleep(6)
+                #play_audio_file(question_audio_file)
+                self.play_audio(question_audio_file)
+                time.sleep(duration_answers)
+
 
                 reply = None
                 while reply not in ['ja', 'nee']:
@@ -250,12 +262,12 @@ class QuizGameSkill(MycroftSkill):
                         self.speak("Kies maar, ja of nee.")
 
                 if reply == 'ja' and correct_answer:
-                    # Play the correct answer audio using Mycroft's play_audio_file
-                    play_audio_file(correct_answer_audio)
+                    # Play the correct answer audio 
+                    self.play_audio(correct_answer_audio)
                     time.sleep(duration_correct)
                     self.gui.show_text('Goed!', override_idle=True)
                     if outro:
-                        play_audio_file(outro)
+                        self.play_audio(outro)
                         self.gui.show_text('Ronja', override_idle=True)
                         time.sleep(duration_outro)
                         break
@@ -264,16 +276,18 @@ class QuizGameSkill(MycroftSkill):
                         break
                 elif (reply == 'ja' and not correct_answer) or (reply == 'nee' and correct_answer):
                     # Play the false answer audio using Mycroft's play_audio_file
-                    play_audio_file(false_answer_audio)
+                    self.play_audio(false_answer_audio)
                     self.gui.show_text('Ronja', override_idle=True)
                     time.sleep(duration_false)
                     if outro:
-                        play_audio_file(outro)
+                        self.play_audio(outro)
                         time.sleep(duration_outro)
                         break
                     else:
                        # time.sleep(5)
+                        self.gui.show_text('Else', override_idle=True)
                         break
+ 
 
                 elif round_num == total_rounds:
                     self.gui.show_text('Einde', override_idle=True)
@@ -282,6 +296,3 @@ class QuizGameSkill(MycroftSkill):
 
     def stop(self):
         pass
-
-def create_skill():
-    return QuizGameSkill()
